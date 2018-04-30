@@ -8,13 +8,13 @@ import android.database.Cursor
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"MyDatabase", null, 1) {
 
-    val TABLE_NAME = "student_table"
+    val TABLE_NAME = "pup_table"
     val COL_1 = "ID"
-    val COL_2 = "NAME"
-    val COL_3 = "SURNAME"
-    val COL_4 = "MARKS"
+    val COL_2 = "SCENARIO"
+    val COL_3 = "DOCUMENT_TYPE"
+    val COL_4 = "CONNECTOR"
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,NAME TEXT,SURNAME TEXT,MARKS INTEGER)")
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,SCENARIO TEXT,DOCUMENT_TYPE TEXT,CONNECTOR TEXT)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -23,12 +23,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"MyDatabase", 
     }
 
 
-    fun insertData(name: String, surname: String, marks: String): Boolean {
+    fun insertData(scenario: String, documentType: String, connector: String): Boolean {
         val db = this.writableDatabase
         val contentValues = ContentValues()
-        contentValues.put(COL_2, name)
-        contentValues.put(COL_3, surname)
-        contentValues.put(COL_4, marks)
+        contentValues.put(COL_2, scenario)
+        contentValues.put(COL_3, documentType)
+        contentValues.put(COL_4, connector)
         val result = db.insert(TABLE_NAME, null, contentValues)
         return result.toInt() != -1
     }

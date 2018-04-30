@@ -79,11 +79,20 @@ class MainActivity : AppCompatActivity() {
                             editText_surname.getText().toString(),
                             editText_Marks.getText().toString())
                     if (isInserted)
+                    {
                         Toast.makeText(this@MainActivity, "Data Inserted", Toast.LENGTH_LONG).show()
+                        editText_name.setText("")
+                        editText_surname.setText("")
+                        editText_Marks.setText("")
+                        editText_id.setText("")
+                    }
+
                     else
                         Toast.makeText(this@MainActivity, "Data not Inserted", Toast.LENGTH_LONG).show()
                 }
         )
+
+
     }
 
     private fun viewAll() {
@@ -99,9 +108,9 @@ class MainActivity : AppCompatActivity() {
                     val buffer = StringBuffer()
                     while (res.moveToNext()) {
                         buffer.append("Id :" + res.getString(0) + "\n")
-                        buffer.append("Name :" + res.getString(1) + "\n")
-                        buffer.append("Surname :" + res.getString(2) + "\n")
-                        buffer.append("Marks :" + res.getString(3) + "\n\n")
+                        buffer.append("Scenario :" + res.getString(1) + "\n")
+                        buffer.append("DocumentType :" + res.getString(2) + "\n")
+                        buffer.append("Connector :" + res.getString(3) + "\n\n")
                     }
 
                     // Show all data
