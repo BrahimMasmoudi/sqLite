@@ -20,34 +20,49 @@ import kotlinx.android.synthetic.main.activity_main.editText_surname
 class MainActivity : AppCompatActivity() {
     lateinit var myDb: DatabaseHelper
 
-    constructor() : super()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        myDb =  DatabaseHelper(this);
+        myDb = DatabaseHelper(this);
         AddData();
         viewAll();
         UpdateData();
         DeleteData();
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        val id = item.getItemId()
+
+
+        return if (id == R.id.action_settings) {
+            true
+        } else super.onOptionsItemSelected(item)
 
     }
 
     private fun DeleteData() {
         button_delete.setOnClickListener(View.OnClickListener {
             fun onClick(v: View) {
-                  var deletedRows = myDb.deleteData(editText_id.text.toString())!!
-                  if (deletedRows > 0)
-                      Toast.makeText(this@MainActivity, "Data Deleted", Toast.LENGTH_LONG).show()
-                  else
-                      Toast.makeText(this@MainActivity, "Data not Deleted", Toast.LENGTH_LONG).show()
-              }
-                }
+                var deletedRows = myDb.deleteData(editText_id.text.toString())!!
+                if (deletedRows > 0)
+                    Toast.makeText(this@MainActivity, "Data Deleted", Toast.LENGTH_LONG).show()
+                else
+                    Toast.makeText(this@MainActivity, "Data not Deleted", Toast.LENGTH_LONG).show()
+            }
+        }
         )
     }
 
-    fun UpdateData() {
+    private fun UpdateData() {
         button_update.setOnClickListener(
                 {
                     val isUpdate = myDb.updateData(editText_id.getText().toString(),
@@ -61,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    fun AddData() {
+    private fun AddData() {
         button_add.setOnClickListener(
                 View.OnClickListener {
                     val isInserted = myDb.insertData(editText_name.getText().toString(),
@@ -75,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    fun viewAll() {
+    private fun viewAll() {
         button_viewAll.setOnClickListener(
                 View.OnClickListener {
                     val res = myDb.getAllData()
@@ -99,7 +114,7 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-    fun showMessage(title: String, Message: String) {
+    private fun showMessage(title: String, Message: String) {
         val builder = AlertDialog.Builder(this)
         builder.setCancelable(true)
         builder.setTitle(title)
@@ -107,22 +122,5 @@ class MainActivity : AppCompatActivity() {
         builder.show()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        val id = item.getItemId()
-
-
-        return if (id == R.id.action_settings) {
-            true
-        } else super.onOptionsItemSelected(item)
-
-    }
 }
