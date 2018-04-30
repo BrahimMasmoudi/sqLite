@@ -8,7 +8,6 @@ import android.database.Cursor
 
 class DatabaseHelper(context: Context) : SQLiteOpenHelper(context,"MyDatabase", null, 1) {
 
-    val DATABASE_NAME = "Student.db"
     val TABLE_NAME = "student_table"
     val COL_1 = "ID"
     val COL_2 = "NAME"

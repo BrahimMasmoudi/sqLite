@@ -31,15 +31,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         val id = item.getItemId()
 
 
@@ -50,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun DeleteData() {
-        button_delete.setOnClickListener(View.OnClickListener {
+        button_delete.setOnClickListener({
             fun onClick(v: View) {
                 var deletedRows = myDb.deleteData(editText_id.text.toString())!!
                 if (deletedRows > 0)
@@ -68,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                     val isUpdate = myDb.updateData(editText_id.getText().toString(),
                             editText_name.getText().toString(),
                             editText_surname.getText().toString(), editText_Marks.getText().toString())
-                    if (isUpdate == true)
+                    if (isUpdate)
                         Toast.makeText(this@MainActivity, "Data Update", Toast.LENGTH_LONG).show()
                     else
                         Toast.makeText(this@MainActivity, "Data not Updated", Toast.LENGTH_LONG).show()
@@ -78,11 +74,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun AddData() {
         button_add.setOnClickListener(
-                View.OnClickListener {
+                {
                     val isInserted = myDb.insertData(editText_name.getText().toString(),
                             editText_surname.getText().toString(),
                             editText_Marks.getText().toString())
-                    if (isInserted == true)
+                    if (isInserted)
                         Toast.makeText(this@MainActivity, "Data Inserted", Toast.LENGTH_LONG).show()
                     else
                         Toast.makeText(this@MainActivity, "Data not Inserted", Toast.LENGTH_LONG).show()
